@@ -8,7 +8,7 @@
 
 void swap_nodes(listint_t **head, listint_t *node1, listint_t *node2)
 {
-	listint_t *auxy1, *auxy2;
+	listint_t *auxy1 = NULL, *auxy2 = NULL;
 
 	if (node1 == NULL || node2 == NULL)
 		return;
