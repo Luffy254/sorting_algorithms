@@ -1,7 +1,7 @@
 #include "sort.h"
 /**
  * swap_nodes - Swaps two nodes in a doubly linked list
- * @head: head of list@list: Pointer to the head of the list
+ * @head: head of list@list
  * @node1: First node to swap
  * @node2: Second node to swap
  */
