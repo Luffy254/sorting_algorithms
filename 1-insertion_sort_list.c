@@ -1,59 +1,52 @@
 #include "sort.h"
 /**
- * swap_nodes - Swaps two nodes in a doubly linked list
- * @curr: pointer to the head of the list
- * @node1: First node to swap
- * @node2: Second node to swap
- */
-
-void swap_nodes(listint_t **curr, listint_t *node1, listint_t *node2)
+  * swap_node -used to make the swap
+  *
+  * @db_list: the list passed doubly linked list
+  * @node1: the current node
+  * Return: current node
+  */
+listint_t *swap_node(listint_t **db_list, listint_t *node1)
 {
-	listint_t *auxy1, *auxy2;
+	listint_t *prev_node;
 
-	if (node1 == NULL || node2 == NULL)
-		return;
+	prev_node = node1->prev;
+	prev_node->next = node1->next;
 
-	auxy1 = node1->prev;
-	auxy2 = node2->next;
+	if (node1->next != NULL)
+		node1->next->prev = prev_node;
 
-	if (auxy1)
-		auxy1->next = node2;
-	if (auxy2)
-		auxy2->prev = node1;
+	node1->prev = prev_node->prev;
+	prev_node->prev = node1;
+	node1->next = prev_node;
 
-	node1->next = auxy2;
-	node1->prev = node2;
-	node2->next = node1;
-	node2->prev = auxy1;
-
-	if (auxy1 == NULL)
-		*curr = node2;
+	if (node1->prev == NULL)
+		*db_list = node1;
+	return (node1);
 }
-
 /**
- * insertion_sort_list - sorts doubly linked list in ascending order
- * @list: pointer to the head of list
- */
+  * insertion_sort_list - sorts doubly linked list in ascending order
+  *
+  * @list: pointer to the head of list
+  */
+
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *curr, *prev;
-	int val;
+	listint_t *node1;
 
-	if (list == NULL || (*list)->next == NULL || *list == NULL)
-		return;
-
-	curr = *list;
-	while (curr)
+	if (list == NULL || (*list) == NULL || (*list)->next == NULL)
 	{
-		prev = curr->prev;
-				val = curr->n;
+		return;
+	}
 
-		while (prev && prev->n > val)
+	node1 = (*list)->next;
+	while (node1 != NULL)
+	{
+		while (node1->prev != NULL && (node1->n < node1->prev->n))
 		{
-			swap_nodes(prev, curr, list);
+			node1 = swap_node(list, node1);
 			print_list(*list);
-			prev = curr->prev;
 		}
-		curr = curr->next;
+		node1 = node1->next;
 	}
 }
