@@ -1,14 +1,14 @@
 #include "sort.h"
 /**
  * swap_nodes - Swaps two nodes in a doubly linked list
- * @head: head of list@list
+ * @curr: pointer to the head of the list
  * @node1: First node to swap
  * @node2: Second node to swap
  */
 
-void swap_nodes(listint_t **head, listint_t *node1, listint_t *node2)
+void swap_nodes(listint_t **curr, listint_t *node1, listint_t *node2)
 {
-	listint_t *auxy1 = NULL, *auxy2 = NULL;
+	listint_t *auxy1, *auxy2;
 
 	if (node1 == NULL || node2 == NULL)
 		return;
@@ -27,7 +27,7 @@ void swap_nodes(listint_t **head, listint_t *node1, listint_t *node2)
 	node2->prev = auxy1;
 
 	if (auxy1 == NULL)
-		*head = node2;
+		*curr = node2;
 }
 
 /**
