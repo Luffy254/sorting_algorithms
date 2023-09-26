@@ -65,7 +65,7 @@ void quicksort(int *array, int low, int high, size_t size)
 	if (low < high)
 	{
 		postn = partition(array, low, high, size);
-		quicksort(array, low, pivot - 1, size);
+		quicksort(array, low, postn - 1, size);
 		quicksort(array, postn + 1, high, size);
 	}
 }
